@@ -5,14 +5,14 @@ int main(int argc, char* argv[])
 {
     cppbuild::init(argc, argv);
 
-    cppbuild::Target target("day-2-corruption-checksum");
+    cppbuild::Target target("day2");
 
     target.files({
                 "program.cpp",
                 "library.cpp",
             });
 
-    cppbuild::Target tests("day-2-corruption-checksum-tests");
+    cppbuild::Target tests("day2-tests");
 
     tests.files({
                 "tests.cpp",
