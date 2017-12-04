@@ -19,5 +19,6 @@ int manhattanDistance(point p);
 int squareValue(const std::map<point, int>& squares, point p);
 int adjacentSquaresSum(const std::map<point, int>& squares, point p);
 int adjacentSquaresSumOfIndex(int index);
+int firstValueLargerThanInput(int input);
 
 #endif // PROGRAM_H

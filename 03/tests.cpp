@@ -1,13 +1,12 @@
 
 #include "library.h"
 
-#define CATCH_CONFIG_FAST_COMPILE
-#define CATCH_CONFIG_MAIN
-#include <catch.hpp>
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include <doctest.h>
 #include <sstream>
 
 // is_number
-TEST_CASE("is_number should work", "[day3]")
+TEST_CASE("is_number should work")
 {
     REQUIRE(is_positive_number("3") == true);
     REQUIRE(is_positive_number("2343") == true);
@@ -16,7 +15,7 @@ TEST_CASE("is_number should work", "[day3]")
 }
 
 // manhattanDistance
-TEST_CASE("manhattanDistance should work", "[day3]")
+TEST_CASE("manhattanDistance should work")
 {
     REQUIRE(manhattanDistance(point({ 1, 4 })) == 5);
     REQUIRE(manhattanDistance(point({ 0, 0 })) == 0);
@@ -25,7 +24,7 @@ TEST_CASE("manhattanDistance should work", "[day3]")
 }
 
 // gridLocationOfIndex
-TEST_CASE("gridLocationOfIndex 1 should work", "[day3]")
+TEST_CASE("gridLocationOfIndex 1 should work")
 {
     auto r = gridLocationOfIndex(1);
     REQUIRE(r.x == 0);
@@ -73,20 +72,45 @@ TEST_CASE("gridLocationOfIndex 1 should work", "[day3]")
 }
 
 // manhattanDistance of gridLocationOfIndex  
-TEST_CASE("manhattanDistance of gridLocationOfIndex 1024 should work", "[day3]")
+TEST_CASE("manhattanDistance of gridLocationOfIndex 1024 should work")
 {
     auto r = gridLocationOfIndex(1024);
     auto m = manhattanDistance(r);
     REQUIRE(m == 31);
 }
 
-// adjacentSquaresSumOfIndex
-TEST_CASE("adjacentSquaresSumOfIndex should work", "[day3]")
+// squareValue
+TEST_CASE("squareValue should work")
 {
-    // REQUIRE(adjacentSquaresSumOfIndex(1) == 1);
-    // REQUIRE(adjacentSquaresSumOfIndex(2) == 1);
-    // REQUIRE(adjacentSquaresSumOfIndex(3) == 2);
-    // REQUIRE(adjacentSquaresSumOfIndex(4) == 4);
+    std::map<point, int> squares;
+    squares.insert(std::make_pair(point({ 1, 3 }), 23));
+    squares.insert(std::make_pair(point({ 1, 4 }), 48));
+
+    REQUIRE(squares.size() == 2);
+    REQUIRE(squareValue(squares, point({ 1, 3 })) == 23);
+    REQUIRE(squareValue(squares, point({ 1, 4 })) == 48);
+    REQUIRE(squareValue(squares, point({ 2, 4 })) == 0);
+}
+
+// adjacentSquaresSum
+TEST_CASE("adjacentSquaresSum should work")
+{
+    std::map<point, int> squares;
+    squares.insert(std::make_pair(point({ 1, 3 }), 23));
+    squares.insert(std::make_pair(point({ 1, 4 }), 48));
+
+    REQUIRE(adjacentSquaresSum(squares, point({ 0, 0 })) == 0);
+    REQUIRE(adjacentSquaresSum(squares, point({ 1, 2 })) == 23);
+    REQUIRE(adjacentSquaresSum(squares, point({ 0, 3 })) == (23 + 48));
+}
+
+// adjacentSquaresSumOfIndex
+TEST_CASE("adjacentSquaresSumOfIndex should work")
+{
+    REQUIRE(adjacentSquaresSumOfIndex(1) == 1);
+    REQUIRE(adjacentSquaresSumOfIndex(2) == 1);
+    REQUIRE(adjacentSquaresSumOfIndex(3) == 2);
+    REQUIRE(adjacentSquaresSumOfIndex(4) == 4);
     REQUIRE(adjacentSquaresSumOfIndex(5) == 5);
     REQUIRE(adjacentSquaresSumOfIndex(6) == 10);
     REQUIRE(adjacentSquaresSumOfIndex(7) == 11);
@@ -106,16 +130,4 @@ TEST_CASE("adjacentSquaresSumOfIndex should work", "[day3]")
     REQUIRE(adjacentSquaresSumOfIndex(21) == 362);
     REQUIRE(adjacentSquaresSumOfIndex(22) == 747);
     REQUIRE(adjacentSquaresSumOfIndex(23) == 806);
-}
-
-// squareValue
-TEST_CASE("squareValue should work", "[day3")
-{
-    std::map<point, int> squares;
-    squares.insert(std::make_pair(point({ 1, 3 }), 23));
-    squares.insert(std::make_pair(point({ 1, 4 }), 48));
-
-    REQUIRE(squareValue(squares, point({ 1, 3 })) == 23);
-    REQUIRE(squareValue(squares, point({ 1, 4 })) == 48);
-    REQUIRE(squareValue(squares, point({ 2, 4 })) == 0);
 }

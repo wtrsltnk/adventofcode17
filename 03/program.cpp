@@ -28,5 +28,9 @@ int main(int argc, char* argv[])
 
     std::cout << "Answer for day 2 is: " << answer1 << "\n";
 
+    auto answer2 = firstValueLargerThanInput(value);
+
+    std::cout << "Answer for day 2, part two is: " << answer2 << "\n";
+
     return 0;
 }

@@ -58,7 +58,6 @@ int squareValue(const std::map<point, int>& squares, point p)
 
     if (itr != squares.end())
     {
-        std::cout << "\t" << p.x << ","<< p.y << "=" << itr->second << "\n";
         return itr->second;
     }
 
@@ -67,35 +66,32 @@ int squareValue(const std::map<point, int>& squares, point p)
 
 int adjacentSquaresSum(const std::map<point, int>& squares, point p)
 {
-    std::cout << p.x << ","<< p.y << "\n";
-    return squareValue(squares, point({ p.x + 1, p.y + 0 }))
+    auto v =  squareValue(squares, point({ p.x + 1, p.y + 0 }))
             + squareValue(squares, point({ p.x + 1, p.y + 1 }))
             + squareValue(squares, point({ p.x + 0, p.y + 1 }))
             + squareValue(squares, point({ p.x - 1, p.y + 1 }))
             + squareValue(squares, point({ p.x - 1, p.y + 0 }))
             + squareValue(squares, point({ p.x - 1, p.y - 1 }))
-            + squareValue(squares, point({ p.x + 0, p.y - 1 }));
+            + squareValue(squares, point({ p.x + 0, p.y - 1 }))
             + squareValue(squares, point({ p.x + 1, p.y - 1 }));
+
+    return v;
 }
 
 int adjacentSquaresSumOfIndex(int index)
 {
-    if (index == 1)
-    {
-        return 1;
-    }
-
     std::map<point, int> pointValues;
-    pointValues.insert(std::make_pair(point({0, 0}), 1));
+    pointValues.insert(std::make_pair(point({ 0, 0 }), 1));
  
-    int total = 0;
-    
-    for (int i = 0; i < index; i++)
+    int total = index == 1 ? 1 : 0;
+    std::cout << "\n";
+    for (int i = 2; i <= index; i++)
     {
-        auto p = gridLocationOfIndex(i + 1);
+        auto p = gridLocationOfIndex(i);
         auto value = adjacentSquaresSum(pointValues, p);
+        std::cout << i << " = [" << p.x << "," << p.y << "] = " << value << "\n";
         pointValues.insert(std::make_pair(p, value));
-        total += value;
+        total = value;
     }
 
     return total;
@@ -111,4 +107,18 @@ bool is_positive_number(const std::string& s)
 int manhattanDistance(point p)
 {
     return std::abs(p.x) + std::abs(p.y);
+}
+
+
+int firstValueLargerThanInput(int input)
+{
+    int i = 0;
+    int value = 0;
+    do
+    {
+        value = adjacentSquaresSumOfIndex(i++);
+    }
+    while (value <= input);
+
+    return i;
 }
