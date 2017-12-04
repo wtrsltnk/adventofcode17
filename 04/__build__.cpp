@@ -5,14 +5,14 @@ int main(int argc, char* argv[])
 {
     cppbuild::init(argc, argv);
 
-    cppbuild::Target target("day2");
+    cppbuild::Target target("day4");
 
     target.files({
                 "program.cpp",
                 "library.cpp",
             });
 
-    cppbuild::Target tests("day2-tests");
+    cppbuild::Target tests("day4-tests");
 
     tests.files({
                 "tests.cpp",
