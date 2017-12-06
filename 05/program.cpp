@@ -23,23 +23,14 @@ int main(int argc, char* argv[])
         return 0;
     }
     
-    auto v = readAllLines(file);
+    auto v1 = readAllLinesAsIntegers(file);
+    auto v2 = std::vector<int>(v1.begin(), v1.end());
 
     file.close();
 
-    auto answer1 = std::accumulate(v.begin(), v.end(), 0, [] (int a, const std::string& b) {
-        auto parts = split(b, ' ');
-        return passphrasesIsValid(parts) ? a + 1 : a; 
-    });
+    std::cout << "Answer for day 5 is: " << countStepsFromInstructions(v1) <<  "\n";
 
-    std::cout << "Answer for day 4 is: " << answer1 <<  "\n";
-
-    auto answer2 = std::accumulate(v.begin(), v.end(), 0, [] (int a, const std::string& b) {
-        auto parts = split(b, ' ');
-        return passphrasesIsValid(parts) && !passphrasesContainsAnagram(parts) ? a + 1 : a; 
-    });
-
-    std::cout << "Answer for day 4, part two is: " << answer2 <<  "\n";
+    std::cout << "Answer for day 5, part two is: " << countStepsFromInstructionsPartTwo(v2) <<  "\n";
 
     return 0;
 }

@@ -2,10 +2,11 @@
 #define PROGRAM_H
 
 #include <fstream>
-#include <string>
 #include <vector>
 
-std::vector<std::string> readAllLines(std::istream& file);
-std::vector<std::string> split(const std::string &s, char delim);
+std::vector<int> readAllLinesAsIntegers(std::istream& file);
+
+int countStepsFromInstructions(std::vector<int>& intructions);
+int countStepsFromInstructionsPartTwo(std::vector<int>& intructions);
 
 #endif // PROGRAM_H
