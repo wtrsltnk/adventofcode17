@@ -5,14 +5,19 @@ int main(int argc, char* argv[])
 {
     cppbuild::init(argc, argv);
 
-    cppbuild::Target target("day5");
+    cppbuild::Target target("day7");
 
     target.files({
                 "program.cpp",
                 "library.cpp",
+                "..\\utils\\utils.cpp",
             });
 
-    cppbuild::Target tests("day5-tests");
+    target.includeDirs({
+        "..\\utils",
+    });
+
+    cppbuild::Target tests("day7-tests");
 
     tests.files({
                 "tests.cpp",

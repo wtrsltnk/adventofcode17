@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <utils.h>
 #include "library.h"
 
 int main(int argc, char* argv[])
@@ -13,17 +14,9 @@ int main(int argc, char* argv[])
         return 0;
     }
 
-    std::ifstream file(argv[1]);
+    Lines lines;
 
-    if (!file.is_open())
-    {
-        std::cout << "*** ERROR *** Given input file could not be opened: " << argv[1] << "\n";
-        return 0;
-    }
-    
-    auto lines = readAllLines(file);
-
-    file.close();
+    lines.readFromFile(argv[1]);
 
     auto programs = linesToPrograms(lines);
     auto foundBottomProgram = bottomProgram(programs);

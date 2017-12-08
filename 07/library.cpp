@@ -1,19 +1,5 @@
 #include "library.h"
 #include <iostream>
-#include <sstream>
-
-std::vector<std::string> readAllLines(std::istream& file)
-{
-    std::vector<std::string> result;
-
-    std::string str;
-    while (std::getline(file, str))
-    {
-        result.push_back(str);
-    }  
-
-    return result;
-}
 
 bool lineToProgram(const std::string& line, Program& program)
 {

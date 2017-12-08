@@ -1,11 +1,8 @@
 #ifndef PROGRAM_H
 #define PROGRAM_H
 
-#include <fstream>
 #include <vector>
 #include <string>
-
-std::vector<std::string> readAllLines(std::istream& file);
 
 struct Program
 {
